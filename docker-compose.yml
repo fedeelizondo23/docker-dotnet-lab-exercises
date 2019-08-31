@@ -4,6 +4,19 @@ volumes:
   postgres_data:
 
 services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/usr/src
+    depends_on:
+      - postgres
+    ports:
+      - ${EJEMPLO_WEB_PORT:-5000}:5000
+    environment:
+      DATABASE_URL: postgres://postgres:3x4mpl3P455@postgres:5432/demo_development
+
   postgres:
     image: postgres:11-alpine
     ports: 
